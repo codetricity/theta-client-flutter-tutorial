@@ -1,16 +1,27 @@
 # theta_tutorial
 
-A new Flutter project.
+Flutter tutorial for theta-client.
 
-## Getting Started
+Build new Flutter app from blank editor and use
+theta-client to handle camera connection.
 
-This project is a starting point for a Flutter application.
+![take picture screen](readme_assets/take_picture_show.png)
 
-A few resources to get you started if this is your first Flutter project:
+## Info example
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```
+var thetaInfo = await _thetaClientFlutter.getThetaInfo();
+...
+...
+Text(
+    'firmware: ${thetaInfo.firmwareVersion}\n'
+    'serial number: ${thetaInfo.serialNumber}\n'
+    'uptime: ${thetaInfo.uptime}\n'
+    'Gyro enabled: ${thetaInfo.hasGyro}\n'
+    'GPS enabled: ${thetaInfo.hasGps}',
+    style: const TextStyle(fontSize: 20),
+    ),
+```
+![show info](readme_assets/info_screenshot.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![show state](readme_assets/state_screenshot.png)

@@ -4,9 +4,9 @@ import 'package:theta_client_flutter/theta_client_flutter.dart';
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
-      body: FlutterTutorial(),
+      body: const FlutterTutorial(),
       appBar: AppBar(
-        title: Text('theta Flutter demo'),
+        title: const Text('theta Flutter demo'),
       ),
     ),
   ));
@@ -85,12 +85,42 @@ class _FlutterTutorialState extends State<FlutterTutorial> {
                     onPressed: () async {
                       var thetaInfo = await _thetaClientFlutter.getThetaInfo();
                       setState(() {
-                        responseWindow =
-                            Text('firmware: ${thetaInfo.firmwareVersion}\n');
+                        responseWindow = SingleChildScrollView(
+                          child: Text(
+                            'firmware: ${thetaInfo.firmwareVersion}\n'
+                            'serial number: ${thetaInfo.serialNumber}\n'
+                            'uptime: ${thetaInfo.uptime}\n'
+                            'Gyro enabled: ${thetaInfo.hasGyro}\n'
+                            'GPS enabled: ${thetaInfo.hasGps}',
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        );
                       });
                     },
-                    child: Text(
+                    child: const Text(
                       'info',
+                      style: TextStyle(fontSize: 32),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () async {
+                      var thetaState =
+                          await _thetaClientFlutter.getThetaState();
+                      setState(() {
+                        responseWindow = SingleChildScrollView(
+                          child: Text(
+                            'battery level: ${thetaState.batteryLevel}\n'
+                            'last file: ${thetaState.latestFileUrl}\n'
+                            'charging: ${thetaState.chargingState}\n'
+                            'recordable time: ${thetaState.recordableTime}\n',
+                            // 'GPS enabled: ${thetaInfo.hasGps}',
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        );
+                      });
+                    },
+                    child: const Text(
+                      'state',
                       style: TextStyle(fontSize: 32),
                     ),
                   ),
@@ -99,10 +129,10 @@ class _FlutterTutorialState extends State<FlutterTutorial> {
             ],
           ),
         ),
-        // Expanded(
-        //   child: responseWindow,
-        //   flex: 1,
-        // ),
+        Expanded(
+          child: responseWindow,
+          flex: 1,
+        ),
       ],
     );
   }
