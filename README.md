@@ -1,6 +1,6 @@
 # theta_tutorial
 
-Flutter tutorial for theta-client.
+[Flutter tutorial for theta-client on YouTube](https://youtu.be/EAwT2j0x5VU?feature=shared)
 
 Build new Flutter app from blank editor and use
 theta-client to handle camera connection.
